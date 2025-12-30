@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Adnanyone Shawarma Clicker – Free Browser Clicker Game</title>
+
+    <meta name="description" content="Play Shawarma Clicker, a free browser-based clicker game where you build a shawarma empire, unlock upgrades, discover secrets, and prestige your way to greatness.">
+
+    <meta name="keywords" content="clicker game, idle game, shawarma clicker, browser game, free game, incremental game, food clicker, upgrade game">
+
+    <meta name="Adnanyone" content="Adnanyone">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="game-wrapper">
+
+    <!-- HEADER -->
+    <header class="top-bar">
+        <div class="title-area">
+            <h1 id="gameTitle">Adnanyone Shawarma Clicker</h1>
+            <p id="flavorText">From street stand to galactic grill.</p>
+        </div>
+        <div class="stats-area">
+            <div class="stat">
+                <span class="stat-label">Shawarmas</span>
+                <span class="stat-value" id="shawarmaCount">0</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Flavor Points</span>
+                <span class="stat-value" id="flavorPoints">0</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">World</span>
+                <span class="stat-value" id="worldName">Shawarma Street</span>
+            </div>
+        </div>
+        <div class="header-buttons">
+            <button id="switchWorldBtn" disabled>Unlock next world at 5,000</button>
+            <button id="prestigeBtn" disabled>Prestige at 100,000</button>
+        </div>
+    </header>
+
+    <main class="main-layout">
+
+        <!-- LEFT COLUMN: CLICKER + EVENTS -->
+        <section class="column left-column">
+            <div class="click-area">
+                <img id="mainShawarma" src="images/shawarma.png" alt="Shawarma" class="clickable">
+                <p class="per-click" id="perClickText">+1 per click</p>
+            </div>
+
+            <div class="panel">
+                <h2>Random Events</h2>
+                <div id="eventLog" class="event-log"></div>
+            </div>
+
+            <div class="panel">
+                <h2>Achievements</h2>
+                <ul id="achievementList" class="achievement-list"></ul>
+            </div>
+        </section>
+
+        <!-- MIDDLE COLUMN: UPGRADES -->
+        <section class="column middle-column">
+            <div class="panel">
+                <h2>Upgrades</h2>
+
+                <!-- CLICK UPGRADES -->
+                <h3 class="panel-subtitle">Click Upgrades</h3>
+
+                <div class="shop-item" id="upgradeExtraSauce">
+                    <img src="images/upgrade1.png" alt="Extra Sauce">
+                    <div>
+                        <h4>Extra Sauce</h4>
+                        <p>+1 shawarma per click</p>
+                        <p>Cost: <span id="extraSauceCost">20</span></p>
+                    </div>
+                </div>
+
+                <div class="shop-item" id="upgradeDoubleGarlic">
+                    <img src="images/garlic.png" alt="Double Garlic">
+                    <div>
+                        <h4>Double Garlic</h4>
+                        <p>+3 shawarmas per click</p>
+                        <p>Cost: <span id="doubleGarlicCost">150</span></p>
+                    </div>
+                </div>
+
+                <div class="shop-item" id="upgradePremiumPita">
+                    <img src="images/pita.png" alt="Premium Pita">
+                    <div>
+                        <h4>Premium Pita</h4>
+                        <p>+10 shawarmas per click</p>
+                        <p>Cost: <span id="premiumPitaCost">800</span></p>
+                    </div>
+                </div>
+
+                <!-- AUTO UPGRADES -->
+                <h3 class="panel-subtitle">Auto Upgrades</h3>
+
+                <div class="shop-item" id="upgradeStreetWorker">
+                    <img src="images/vendor.png" alt="Street Worker">
+                    <div>
+                        <h4>Street Worker</h4>
+                        <p>+1 shawarma per second</p>
+                        <p>Cost: <span id="streetWorkerCost">50</span></p>
+                    </div>
+                </div>
+
+                <div class="shop-item" id="upgradeDeliveryScooter">
+                    <img src="images/scooter.png" alt="Delivery Scooter">
+                    <div>
+                        <h4>Delivery Scooter</h4>
+                        <p>+5 shawarmas per second</p>
+                        <p>Cost: <span id="deliveryScooterCost">400</span></p>
+                    </div>
+                </div>
+
+                <div class="shop-item" id="upgradeNightShift">
+                    <img src="images/workers.webp" alt="Night Shift Crew">
+                    <div>
+                        <h4>Night Shift Crew</h4>
+                        <p>+20 shawarmas per second</p>
+                        <p>Cost: <span id="nightShiftCost">2000</span></p>
+                    </div>
+                </div>
+
+                <!-- BOOSTS -->
+                <h3 class="panel-subtitle">Boosts</h3>
+
+                <div class="shop-item" id="upgradeGoldenWrap">
+                    <img src="images/golden bread.png" alt="Golden Wrap">
+                    <div>
+                        <h4>Golden Wrap</h4>
+                        <p>2× shawarmas for 20 seconds</p>
+                        <p>Cost: <span id="goldenWrapCost">1500</span></p>
+                    </div>
+                </div>
+
+                <div class="shop-item" id="upgradeSpiceMastery">
+                    <img src="images/spice.webp" alt="Spice Mastery">
+                    <div>
+                        <h4>Spice Mastery</h4>
+                        <p>Permanent +10% total shawarmas</p>
+                        <p>Cost: <span id="spiceMasteryCost">2500</span></p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- RIGHT COLUMN: COLLECTIBLES + SECRETS + PRESTIGE -->
+        <section class="column right-column">
+
+            <div class="panel">
+                <h2>Ingredients</h2>
+                <div class="ingredients-grid">
+                    <div class="ingredient" id="ingGarlic">
+                        <img src="images/garlic.png" alt="Garlic">
+                        <span>Garlic</span>
+                        <span class="ingredient-count" id="garlicCount">0</span>
+                    </div>
+                    <div class="ingredient" id="ingPickles">
+                        <img src="images/pickles.webp" alt="Pickles">
+                        <span>Pickles</span>
+                        <span class="ingredient-count" id="picklesCount">0</span>
+                    </div>
+                    <div class="ingredient" id="ingTahini">
+                        <img src="images/tahini.webp" alt="Tahini">
+                        <span>Tahini</span>
+                        <span class="ingredient-count" id="tahiniCount">0</span>
+                    </div>
+                    <div class="ingredient" id="ingChili">
+                        <img src="images/red-chillies.jpg" alt="Chili">
+                        <span>Chili</span>
+                        <span class="ingredient-count" id="chiliCount">0</span>
+                    </div>
+                    <div class="ingredient" id="ingPita">
+                        <img src="images/pita.png" alt="Pita">
+                        <span>Pita</span>
+                        <span class="ingredient-count" id="pitaCount">0</span>
+                    </div>
+                    <div class="ingredient" id="ingLemon">
+                        <img src="images/lemon.webp" alt="Lemon">
+                        <span>Lemon</span>
+                        <span class="ingredient-count" id="lemonCount">0</span>
+                    </div>
+                </div>
+                <p class="small-text">Collect full sets to unlock powerful bonuses.</p>
+            </div>
+
+            <div class="panel">
+                <h2>Secrets</h2>
+                <ul id="secretsList" class="secrets-list">
+                    <li id="secretRecipeEntry" class="secret-locked">Secret Recipe — ???</li>
+                    <li id="forbiddenScrollEntry" class="secret-locked">Forbidden Scroll — ???</li>
+                    <li id="sauceDimensionEntry" class="secret-locked">The Sauce Dimension — ???</li>
+                </ul>
+            </div>
+
+            <div class="panel">
+                <h2>Prestige Upgrades</h2>
+                <div class="shop-item small" id="prestigeQuantumShawarma">
+                    <img src="images/golden shawarms.png" alt="Quantum Shawarma">
+                    <div>
+                        <h4>Quantum Shawarma</h4>
+                        <p>+10% global shawarma gain</p>
+                        <p>Cost: <span id="quantumCost">5</span> Flavor Points</p>
+                    </div>
+                </div>
+
+                <div class="shop-item small" id="prestigeInfiniteSauce">
+                    <img src="images/sauce.png" alt="Infinite Sauce Pump">
+                    <div>
+                        <h4>Infinite Sauce Pump</h4>
+                        <p>+20% click power</p>
+                        <p>Cost: <span id="infiniteSauceCost">8</span> Flavor Points</p>
+                    </div>
+                </div>
+
+                <div class="shop-item small" id="prestigeTimeChef">
+                    <img src="images/future chef.png" alt="Time-Traveling Chef">
+                    <div>
+                        <h4>Time-Traveling Chef</h4>
+                        <p>+20% auto production</p>
+                        <p>Cost: <span id="timeChefCost">8</span> Flavor Points</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FLOATING GOLDEN EVENT BUTTON -->
+    <button id="goldenShawarmaBtn" class="golden-shawarma hidden">
+        <img src="images/golden shawarms.png" alt="Golden Shawarma">
+    </button>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
